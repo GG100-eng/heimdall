@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Heimdall"
+description = "A personal high-signal X-style feed for Gagan, with locally persisted posts, reactions, ranking lanes, and a finite reading experience."
+version = "1.0.0"
+id = "artifacts/heimdall"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20690
+
+[services.development]
+run = "pnpm --filter @workspace/heimdall run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/heimdall", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/heimdall/dist"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20690"
+BASE_PATH = "/"
