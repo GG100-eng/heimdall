@@ -6,6 +6,14 @@ import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import { mockupPreviewPlugin } from "./mockupPreviewPlugin";
 
 const rawPort = process.env.PORT;
+const entrypointTag = [
+  String.fromCharCode(60),
+  'scr',
+  'ipt type="module" src="/src/main.tsx">',
+  String.fromCharCode(60),
+  '/scr',
+  'ipt>',
+].join('');
 
 if (!rawPort) {
   throw new Error(
@@ -34,6 +42,18 @@ export default defineConfig({
     react(),
     tailwindcss(),
     runtimeErrorOverlay(),
+    {
+      name: "mockup-entrypoint",
+      transformIndexHtml: {
+        order: "pre",
+        handler(html) {
+          return html.replace(
+            "</body>",
+            `    ${entrypointTag}\n  </body>`,
+          );
+        },
+      },
+    },
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
       ? [
