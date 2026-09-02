@@ -28,10 +28,11 @@ export type Post = {
   author: { name: string; handle: string; avatar: string; verified: boolean };
   text: string;
   createdAt: string;
-  media: { type: string; url: string; alt: string }[];
+  media: { type: string; url: string; alt?: string }[];
   article: { url: string; domain: string; title: string; excerpt: string; image: string | null } | null;
   metrics: { replies: number; reposts: number; likes: number; bookmarks: number; views: number };
   bucket: Bucket;
+  url?: string;
 };
 export type LocalState = Record<string, { liked?: boolean; reposted?: boolean; bookmarked?: boolean; likes?: number; reposts?: number; bookmarks?: number }>;
 const gaganAvatar = 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80';
@@ -162,7 +163,7 @@ export function PostCard({
           <button type="button" className="icon-button post-more" aria-label="More post actions" data-testid={`button-more-${post.id}`} onClick={(event) => event.stopPropagation()}><MoreHorizontal size={17} /></button>
         </header>
         <p className="post-text"><RichText text={post.text} /></p>
-        {post.media.length > 0 && <img className="post-media" src={post.media[0].url} alt={post.media[0].alt} />}
+        {post.media.length > 0 && <img className="post-media" src={post.media[0].url} alt={post.media[0].alt ?? ''} />}
         {post.article && (
           <a className="article-card" href={post.article.url} target="_blank" rel="noreferrer" onClick={(event) => event.stopPropagation()} data-testid={`link-article-${post.id}`}>
             {post.article.image ? <img src={post.article.image} alt="" /> : <div className="article-art"><Sparkles size={20} /></div>}
@@ -174,7 +175,7 @@ export function PostCard({
           <ActionButton id={post.id} label="repost" count={reposts} active={state?.reposted} tone="repost" onClick={() => onToggle(post.id, 'reposted')} />
           <ActionButton id={post.id} label="like" count={likes} active={state?.liked} tone="like" onClick={() => onToggle(post.id, 'liked')} />
           <ActionButton id={post.id} label="bookmark" count={bookmarks} active={state?.bookmarked} tone="bookmark" onClick={() => onToggle(post.id, 'bookmarked')} />
-          <ActionButton id={post.id} label="share" onClick={() => navigator.clipboard?.writeText(`${window.location.origin}/status/${post.id}`)} />
+          <ActionButton id={post.id} label="share" onClick={() => navigator.clipboard?.writeText(post.url ?? `${window.location.origin}/status/${post.id}`)} />
         </footer>
       </div>
     </article>

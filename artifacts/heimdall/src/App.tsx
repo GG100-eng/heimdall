@@ -11,6 +11,34 @@ import { Route, Switch, useLocation, useParams, Router as WouterRouter } from 'w
 const queryClient = new QueryClient();
 const seedPosts = feed as Post[];
 const bucketOrder: Record<Post['bucket'], number> = { now: 0, serendipity: 1, later: 2 };
+const liveFeedUrl = `${import.meta.env.BASE_URL}feed.json`;
+
+let rankedCache: Post[] | null = null;
+
+function isRankedFeed(value: unknown): value is Post[] {
+  return Array.isArray(value) && value.every((item) => {
+    if (!item || typeof item !== 'object') return false;
+    const post = item as Partial<Post>;
+    return typeof post.id === 'string' && typeof post.text === 'string' && typeof post.bucket === 'string';
+  });
+}
+
+async function fetchRankedFeed(): Promise<Post[] | null> {
+  try {
+    const response = await fetch(liveFeedUrl, { cache: 'no-store' });
+    if (!response.ok) return null;
+    const data: unknown = await response.json();
+    if (!isRankedFeed(data) || data.length === 0) return null;
+    rankedCache = data;
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+function currentRankedPosts(): Post[] {
+  return rankedCache ?? seedPosts;
+}
 
 function readLocalPosts(): Post[] {
   try {
@@ -30,9 +58,20 @@ function readLocalState(): LocalState {
 
 function Home() {
   const [, setLocation] = useLocation();
-  const [posts, setPosts] = useState<Post[]>(() => [...readLocalPosts(), ...seedPosts]);
+  const [rankedPosts, setRankedPosts] = useState<Post[]>(currentRankedPosts);
+  const [localPosts, setLocalPosts] = useState<Post[]>(readLocalPosts);
   const [actionState, setActionState] = useState<LocalState>(readLocalState);
+  const posts = useMemo(() => [...localPosts, ...rankedPosts], [localPosts, rankedPosts]);
   const orderedPosts = useMemo(() => [...posts].sort((a, b) => bucketOrder[a.bucket] - bucketOrder[b.bucket] || new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()), [posts]);
+
+  const loadFeed = async () => {
+    const live = await fetchRankedFeed();
+    if (live) setRankedPosts(live);
+  };
+
+  useEffect(() => {
+    void loadFeed();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem('heimdall-actions', JSON.stringify(actionState));
@@ -59,12 +98,12 @@ function Home() {
       metrics: { replies: 0, reposts: 0, likes: 0, bookmarks: 0, views: 0 },
       bucket: 'now',
     };
-    setPosts((current) => [localPost, ...current]);
+    setLocalPosts((current) => [localPost, ...current]);
     localStorage.setItem('heimdall-local-posts', JSON.stringify([localPost, ...readLocalPosts()]));
   };
 
   return (
-    <AppShell>
+    <AppShell onRefresh={() => { void loadFeed(); }}>
       <FeedView posts={orderedPosts} state={actionState} onPost={addPost} onToggle={toggle} onOpen={(id) => setLocation(`/status/${id}`)} />
     </AppShell>
   );
@@ -74,8 +113,19 @@ function StatusPage() {
   const { id } = useParams<{ id: string }>();
   const [, setLocation] = useLocation();
   const [actionState, setActionState] = useState<LocalState>(readLocalState);
-  const post = [...readLocalPosts(), ...seedPosts].find((item) => item.id === id);
+  const [rankedPosts, setRankedPosts] = useState<Post[]>(currentRankedPosts);
+  const [feedReady, setFeedReady] = useState(rankedCache !== null);
+  const post = [...readLocalPosts(), ...rankedPosts].find((item) => item.id === id);
+
+  useEffect(() => {
+    void fetchRankedFeed().then((live) => {
+      if (live) setRankedPosts(live);
+      setFeedReady(true);
+    });
+  }, []);
+
   useEffect(() => { localStorage.setItem('heimdall-actions', JSON.stringify(actionState)); }, [actionState]);
+  if (!post && !feedReady) return <AppShell><></></AppShell>;
   if (!post) return <AppShell><div className="not-found-inline"><span className="eyebrow">404 / gate closed</span><h2>This keeper isn't in the cut.</h2><button type="button" onClick={() => setLocation('/')} data-testid="button-return-home">Return home</button></div></AppShell>;
   const toggle = (postId: string, key: 'liked' | 'reposted' | 'bookmarked') => {
     setActionState((current) => {
