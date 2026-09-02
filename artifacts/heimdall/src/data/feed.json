@@ -1,0 +1,114 @@
+[
+  {
+    "id": "keeper-01",
+    "author": { "name": "Gagan Gehani", "handle": "GaganGehani", "avatar": "https://i.pravatar.cc/80?img=12", "verified": true },
+    "text": "The best senior PM interviews are not trivia checks. They are a compressed test of judgment: can you name the bet, show the trade-off, and make the decision legible to a skeptical team? I’m hiring for that kind of thinking.",
+    "createdAt": "2026-09-02T06:42:00Z",
+    "media": [],
+    "article": null,
+    "metrics": { "replies": 12, "reposts": 34, "likes": 287, "bookmarks": 91, "views": 18400 },
+    "bucket": "now"
+  },
+  {
+    "id": "keeper-02",
+    "author": { "name": "Lenny Rachitsky", "handle": "lennysan", "avatar": "https://i.pravatar.cc/80?img=11", "verified": true },
+    "text": "Interview prompt: what did you kill?",
+    "createdAt": "2026-09-02T04:18:00Z",
+    "media": [],
+    "article": null,
+    "metrics": { "replies": 18, "reposts": 62, "likes": 611, "bookmarks": 240, "views": 32600 },
+    "bucket": "now"
+  },
+  {
+    "id": "keeper-03",
+    "author": { "name": "Shreyas Doshi", "handle": "shreyas", "avatar": "https://i.pravatar.cc/80?img=68", "verified": true },
+    "text": "The thing I keep noticing in AI product demos:\n\nThe model answers well.\nThe user still has to do the work.\n\nThe best products close that last gap.",
+    "createdAt": "2026-09-02T02:06:00Z",
+    "media": [
+      { "type": "image", "url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80", "alt": "Laptop on a desk beside a notebook" }
+    ],
+    "article": null,
+    "metrics": { "replies": 21, "reposts": 83, "likes": 902, "bookmarks": 390, "views": 51200 },
+    "bucket": "now"
+  },
+  {
+    "id": "keeper-04",
+    "author": { "name": "Kunal Shah", "handle": "kunalb11", "avatar": "https://i.pravatar.cc/80?img=13", "verified": true },
+    "text": "No one wakes up wanting a wallet. They want to split dinner, pay a friend, or move money home.",
+    "createdAt": "2026-09-01T22:31:00Z",
+    "media": [
+      { "type": "image", "url": "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1200&q=80", "alt": "People collaborating around a table" }
+    ],
+    "article": null,
+    "metrics": { "replies": 44, "reposts": 71, "likes": 518, "bookmarks": 202, "views": 44900 },
+    "bucket": "now"
+  },
+  {
+    "id": "keeper-05",
+    "author": { "name": "Maya Hegde", "handle": "mayahegde", "avatar": "https://i.pravatar.cc/80?img=47", "verified": false },
+    "text": "A HashSphere / tokenization PM case I like: you have a trusted asset registry, but no one agrees on the first customer. Map the demand around a painful reconciliation workflow before debating the token model. Distribution is the product.",
+    "createdAt": "2026-09-01T18:12:00Z",
+    "media": [],
+    "article": null,
+    "metrics": { "replies": 9, "reposts": 19, "likes": 176, "bookmarks": 88, "views": 12100 },
+    "bucket": "now"
+  },
+  {
+    "id": "keeper-06",
+    "author": { "name": "Hamel Husain", "handle": "HamelHusain", "avatar": "https://i.pravatar.cc/80?img=60", "verified": true },
+    "text": "Agent evals are moving from benchmark theatre to product instrumentation. The useful question is where an agent becomes unreliable, how often, and what recovery looks like.",
+    "createdAt": "2026-09-01T15:05:00Z",
+    "media": [],
+    "article": {
+      "url": "https://hamel.dev/blog/agent-evals",
+      "domain": "hamel.dev",
+      "title": "Agent evals are product instrumentation",
+      "excerpt": "A field guide to evaluating agents in the messy places where real users meet uncertainty.",
+      "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=600&q=80"
+    },
+    "metrics": { "replies": 16, "reposts": 54, "likes": 433, "bookmarks": 261, "views": 28700 },
+    "bucket": "serendipity"
+  },
+  {
+    "id": "keeper-07",
+    "author": { "name": "Nadia Asparouhova", "handle": "nadia_asparouh", "avatar": "https://i.pravatar.cc/80?img=32", "verified": true },
+    "text": "Remote work is not placeless work. The best teams write down what deserves synchronous energy.",
+    "createdAt": "2026-09-01T12:44:00Z",
+    "media": [
+      { "type": "image", "url": "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80", "alt": "Bright modern workspace with desks and plants" }
+    ],
+    "article": null,
+    "metrics": { "replies": 13, "reposts": 47, "likes": 384, "bookmarks": 212, "views": 23100 },
+    "bucket": "serendipity"
+  },
+  {
+    "id": "keeper-08",
+    "author": { "name": "Julie Zhuo", "handle": "joulee", "avatar": "https://i.pravatar.cc/80?img=49", "verified": true },
+    "text": "A product strategy becomes useful when it tells the team what not to pursue this quarter. If every opportunity survives the strategy, you have made a mood board.",
+    "createdAt": "2026-08-31T17:26:00Z",
+    "media": [],
+    "article": null,
+    "metrics": { "replies": 26, "reposts": 108, "likes": 1200, "bookmarks": 610, "views": 88400 },
+    "bucket": "later"
+  },
+  {
+    "id": "keeper-09",
+    "author": { "name": "Packy McCormick", "handle": "packyM", "avatar": "https://i.pravatar.cc/80?img=56", "verified": true },
+    "text": "The boring advantage in crypto is still distribution. Wallet UX, recovery, compliance, and the unglamorous moments between intent and settlement will decide which ideas become everyday products.",
+    "createdAt": "2026-08-30T11:10:00Z",
+    "media": [],
+    "article": null,
+    "metrics": { "replies": 31, "reposts": 76, "likes": 702, "bookmarks": 345, "views": 54000 },
+    "bucket": "later"
+  },
+  {
+    "id": "keeper-10",
+    "author": { "name": "Ravi Mehta", "handle": "ravim", "avatar": "https://i.pravatar.cc/80?img=59", "verified": false },
+    "text": "When a roadmap feels crowded, score each item by the confidence it creates, not the excitement it generates. Confidence compounds quietly; excitement usually asks to be refreshed next week.",
+    "createdAt": "2026-08-29T08:03:00Z",
+    "media": [],
+    "article": null,
+    "metrics": { "replies": 7, "reposts": 22, "likes": 248, "bookmarks": 139, "views": 16200 },
+    "bucket": "later"
+  }
+]
