@@ -1,0 +1,48 @@
+{
+  "updatedAt": "2026-09-02T18:00:00.000Z",
+  "intent": "job hunt",
+  "goals": [
+    {
+      "id": "role",
+      "title": "Land an excellent senior/founding/product-lead role in AI, crypto/Web3, or consumer tech (India, UAE, Singapore, Malaysia, Japan, compatible remote).",
+      "detail": "",
+      "active": true
+    },
+    {
+      "id": "physique",
+      "title": "Get leaner while keeping or building muscle: vegetarian high-protein (India ingredients), resistance training, walking, recovery, sleep; consistency over intensity.",
+      "detail": "",
+      "active": true
+    },
+    {
+      "id": "proof-of-work",
+      "title": "Build public proof of work: AI agents, personal AI, browser agents, recsys, consumer AI, AI video, crypto/onchain, social/creator tools, intentional tech.",
+      "detail": "",
+      "active": true
+    },
+    {
+      "id": "network",
+      "title": "Grow a professional network of founders, PMs, recruiters, engineers, researchers, builders, investors when there is a concrete reason to know them.",
+      "detail": "",
+      "active": true
+    }
+  ],
+  "exclude": [
+    "jokes",
+    "memes",
+    "politics/policy",
+    "outrage",
+    "internships",
+    "beginner career bait",
+    "generic fitness motivation",
+    "ads"
+  ],
+  "geos": [
+    "India",
+    "UAE",
+    "Singapore",
+    "Malaysia",
+    "Japan",
+    "remote"
+  ]
+}

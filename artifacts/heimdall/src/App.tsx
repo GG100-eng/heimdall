@@ -2,7 +2,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
 import { AppShell, DetailView, FeedView, type LocalState, type Post } from '@/components/heimdall/HeimdallUI';
+import { GoalsView } from '@/components/heimdall/GoalsView';
 import feed from '@/data/feed.json';
+import seedGoals from '@/data/goals.json';
+import { loadGoals, normalizeGoals, publishGoals, type GoalsSpec } from '@/lib/goals';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
@@ -10,6 +13,7 @@ import { Route, Switch, useLocation, useParams, Router as WouterRouter } from 'w
 
 const queryClient = new QueryClient();
 const seedPosts = feed as Post[];
+const fallbackGoals = normalizeGoals(seedGoals) as GoalsSpec;
 const bucketOrder: Record<Post['bucket'], number> = { now: 0, serendipity: 1, later: 2 };
 const liveFeedUrl = `${import.meta.env.BASE_URL}feed.json`;
 
@@ -138,12 +142,49 @@ function StatusPage() {
   return <AppShell><DetailView post={post} state={actionState[post.id]} onToggle={toggle} /></AppShell>;
 }
 
+function GoalsPage() {
+  const [spec, setSpec] = useState<GoalsSpec>(fallbackGoals);
+  const [source, setSource] = useState<'live' | 'local' | 'seed'>('seed');
+  const [status, setStatus] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  const load = async () => {
+    const loaded = await loadGoals(fallbackGoals);
+    setSpec(loaded.spec);
+    setSource(loaded.source);
+  };
+
+  useEffect(() => {
+    void load();
+  }, []);
+
+  const save = async () => {
+    if (spec.goals.some((goal) => !goal.title.trim())) {
+      setStatus('Every goal needs a title.');
+      return;
+    }
+    setSaving(true);
+    const result = await publishGoals(spec);
+    setSpec(result.spec);
+    setSource(result.published ? 'live' : 'local');
+    setStatus(result.message);
+    setSaving(false);
+  };
+
+  return (
+    <AppShell onRefresh={() => { void load(); }}>
+      <GoalsView spec={spec} source={source} status={status} saving={saving} onChange={setSpec} onSave={() => { void save(); }} />
+    </AppShell>
+  );
+}
+
 function Router() {
   return (
     <ErrorBoundary resetKey={window.location.pathname}>
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/status/:id" component={StatusPage} />
+        <Route path="/goals" component={GoalsPage} />
         <Route component={NotFound} />
       </Switch>
     </ErrorBoundary>

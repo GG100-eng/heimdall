@@ -1,2 +1,4 @@
-/feed.json /feed.json 200
-/*    /index.html   200
+/feed.json  /feed.json  200
+/goals.json /goals.json 200
+/api/*      /api/:splat 200
+/*          /index.html 200

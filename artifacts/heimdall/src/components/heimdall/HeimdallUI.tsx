@@ -19,6 +19,7 @@ import {
   Share2,
   Heart,
   Sparkles,
+  Target,
   UserRound,
 } from 'lucide-react';
 
@@ -183,28 +184,34 @@ export function PostCard({
 }
 
 function Sidebar() {
+  const [location] = useLocation();
   const navItems: { label: string; icon: ReactNode; href?: string; disabled?: boolean }[] = [
     { label: 'Home', icon: <HomeIcon size={22} />, href: '/' },
     { label: 'Search', icon: <Search size={22} /> },
     { label: 'Alerts', icon: <Bell size={22} />, disabled: true },
     { label: 'Bookmarks', icon: <Bookmark size={22} />, disabled: true },
+    { label: 'Goals', icon: <Target size={22} />, href: '/goals' },
     { label: 'Profile', icon: <UserRound size={22} /> },
   ];
   return (
     <aside className="sidebar">
       <Link href="/" className="brand-link" aria-label="Heimdall home" data-testid="link-home-logo"><LogoMark /><span>heimdall</span></Link>
       <nav className="side-nav" aria-label="Primary navigation">
-        {navItems.map((item) => item.disabled ? (
-          <button key={item.label} type="button" className="nav-item nav-disabled" disabled aria-label={`${item.label} disabled`} data-testid={`button-nav-${item.label.toLowerCase()}`}>{item.icon}<span>{item.label}</span></button>
-        ) : item.href ? (
-          <Link key={item.label} href={item.href} className="nav-item" data-testid={`link-nav-${item.label.toLowerCase()}`}>{item.icon}<span>{item.label}</span></Link>
-        ) : (
-          <button key={item.label} type="button" className="nav-item" onClick={() => undefined} data-testid={`button-nav-${item.label.toLowerCase()}`}>{item.icon}<span>{item.label}</span></button>
-        ))}
+        {navItems.map((item) => {
+          const active = Boolean(item.href && (item.href === '/' ? location === '/' : location.startsWith(item.href)));
+          const className = `nav-item${active ? ' active' : ''}${item.disabled ? ' nav-disabled' : ''}`;
+          if (item.disabled) {
+            return <button key={item.label} type="button" className={className} disabled aria-label={`${item.label} disabled`} data-testid={`button-nav-${item.label.toLowerCase()}`}>{item.icon}<span>{item.label}</span></button>;
+          }
+          if (item.href) {
+            return <Link key={item.label} href={item.href} className={className} data-testid={`link-nav-${item.label.toLowerCase()}`}>{item.icon}<span>{item.label}</span></Link>;
+          }
+          return <button key={item.label} type="button" className={className} onClick={() => undefined} data-testid={`button-nav-${item.label.toLowerCase()}`}>{item.icon}<span>{item.label}</span></button>;
+        })}
       </nav>
       <button type="button" className="compose-side-button" onClick={() => document.getElementById('composer-input')?.focus()} data-testid="button-compose-side"><PenLine size={19} /><span>Post</span></button>
       <div className="sidebar-bottom">
-        <div className="account-chip" data-testid="text-account-chip"><Avatar author={{ name: 'Gagan Gehani', handle: 'GaganGehani', avatar: gaganAvatar, verified: true }} size="sm" /><div><strong>Gagan Gehani</strong><small>@GaganGehani</small></div><ChevronDown size={16} /></div>
+        <Link href="/goals" className="account-chip" data-testid="text-account-chip"><Avatar author={{ name: 'Gagan Gehani', handle: 'GaganGehani', avatar: gaganAvatar, verified: true }} size="sm" /><div><strong>Gagan Gehani</strong><small>Goals</small></div><ChevronDown size={16} /></Link>
       </div>
     </aside>
   );
@@ -245,26 +252,28 @@ export function AppShell({ children, onRefresh }: { children: ReactNode; onRefre
     window.setTimeout(() => { setRefreshing(false); onRefresh?.(); }, 400);
   };
   const top = () => mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  const onGoals = location === '/goals';
+  const title = location === '/' ? 'Home' : onGoals ? 'Goals' : 'Post';
   return (
     <div className="heimdall-app">
       <Sidebar />
       <main ref={mainRef} className="main-column feed-scroll">
-        {showNew && <button type="button" className="new-keepers-pill rise-in" onClick={top} data-testid="button-new-keepers"><Plus size={14} /> 3 new keepers</button>}
+        {showNew && location === '/' && <button type="button" className="new-keepers-pill rise-in" onClick={top} data-testid="button-new-keepers"><Plus size={14} /> 3 new keepers</button>}
         <header className="topbar">
           {location !== '/' && <Link href="/" className="back-button heimdall-focus" aria-label="Back to home" data-testid="link-back-home"><ArrowLeft size={19} /></Link>}
-      <div><h1>{location === '/' ? 'Home' : 'Post'}</h1></div>
-          <button type="button" className={`refresh-button ${refreshing ? 'refreshing' : ''}`} onClick={refresh} aria-label="Refresh feed" data-testid="button-refresh"><LoaderCircle size={18} /></button>
+      <div><h1>{title}</h1></div>
+          <button type="button" className={`refresh-button ${refreshing ? 'refreshing' : ''}`} onClick={refresh} aria-label={onGoals ? 'Refresh goals' : 'Refresh feed'} data-testid="button-refresh"><LoaderCircle size={18} /></button>
         </header>
         {children}
         <div className="mobile-spacer" />
       </main>
       <RightRail />
       <nav className="mobile-tabs" aria-label="Mobile navigation">
-        <Link href="/" className="mobile-tab active" aria-label="Home" data-testid="mobile-home"><HomeIcon size={21} /></Link>
+        <Link href="/" className={`mobile-tab ${location === '/' ? 'active' : ''}`} aria-label="Home" data-testid="mobile-home"><HomeIcon size={21} /></Link>
         <button type="button" className="mobile-tab" aria-label="Search" data-testid="mobile-search"><Search size={21} /></button>
           <button type="button" className="mobile-tab" aria-label="Alerts disabled" disabled data-testid="mobile-alerts"><Bell size={21} /></button>
           <button type="button" className="mobile-tab" aria-label="Bookmarks disabled" disabled data-testid="mobile-bookmarks"><Bookmark size={21} /></button>
-        <button type="button" className="mobile-tab" aria-label="Profile" data-testid="mobile-profile"><UserRound size={21} /></button>
+        <Link href="/goals" className={`mobile-tab mobile-tab-goals ${onGoals ? 'active' : ''}`} aria-label="Goals" data-testid="mobile-goals"><Target size={21} /><span>Goals</span></Link>
       </nav>
     </div>
   );

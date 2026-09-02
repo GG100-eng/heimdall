@@ -15,6 +15,42 @@ const entrypointTag = [
   'ipt>',
 ].join('');
 
+function attachGoalsApi(server: { middlewares: { use: Function } }) {
+  server.middlewares.use(async (req: { url?: string; method?: string; headers: Record<string, string | string[] | undefined> }, res: { statusCode: number; setHeader: Function; end: Function }, next: () => void) => {
+    if (!req.url?.split('?')[0].startsWith('/api/goals')) {
+      next();
+      return;
+    }
+    const { handleGoalsPost, onRequestGet, onRequestOptions } = await import('../../functions/api/goals.js');
+    const origin = `http://${req.headers.host ?? 'localhost'}`;
+    if (req.method === 'OPTIONS') {
+      const response = onRequestOptions();
+      res.statusCode = response.status;
+      response.headers.forEach((value: string, key: string) => res.setHeader(key, value));
+      res.end();
+      return;
+    }
+    if (req.method === 'GET' || req.method === 'HEAD') {
+      const response = onRequestGet();
+      res.statusCode = response.status;
+      response.headers.forEach((value: string, key: string) => res.setHeader(key, value));
+      res.end(await response.text());
+      return;
+    }
+    const chunks: Buffer[] = [];
+    for await (const chunk of req as unknown as AsyncIterable<Buffer>) chunks.push(chunk);
+    const request = new Request(`${origin}${req.url}`, {
+      method: req.method,
+      headers: { 'content-type': 'application/json', origin },
+      body: Buffer.concat(chunks),
+    });
+    const response = await handleGoalsPost(request, {});
+    res.statusCode = response.status;
+    response.headers.forEach((value: string, key: string) => res.setHeader(key, value));
+    res.end(await response.text());
+  });
+}
+
 if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${process.env.PORT}"`);
 }
@@ -36,6 +72,11 @@ export default defineConfig({
           );
         },
       },
+    },
+    {
+      name: 'heimdall-goals-api',
+      configureServer: attachGoalsApi,
+      configurePreviewServer: attachGoalsApi,
     },
     ...(process.env.NODE_ENV !== 'production' &&
     process.env.REPL_ID !== undefined

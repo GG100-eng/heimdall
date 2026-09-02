@@ -1,0 +1,5 @@
+# Pages root is the repo root (dashboard: Vite, `npm run build`, output `dist`).
+# Functions belong here — not inside artifacts/heimdall — so Cloudflare actually serves them.
+name = "heimdall-aae"
+compatibility_date = "2024-11-11"
+pages_build_output_dir = "./dist"
