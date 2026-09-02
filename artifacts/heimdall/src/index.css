@@ -239,7 +239,7 @@ kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; 
 .goal-reorder button:disabled { opacity: .3; }
 .goal-reorder button:hover, .goal-delete:hover { background: hsl(var(--secondary)); color: hsl(var(--foreground)); }
 .goal-active { margin-left: auto; display: flex; align-items: center; gap: 6px; color: hsl(var(--muted-foreground)); font-size: 12px; }
-.goal-title-input { font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+.goal-title-input { font-weight: 700; font-size: 14px; margin-bottom: 8px; resize: vertical; min-height: 68px; line-height: 1.35; }
 .goal-detail-input { resize: vertical; min-height: 52px; font-size: 13px; line-height: 1.4; }
 .chip-row { display: flex; flex-wrap: wrap; gap: 8px; min-height: 8px; }
 .goal-chip {

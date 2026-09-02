@@ -160,12 +160,13 @@ export function GoalsView({
                   <Trash2 size={15} />
                 </button>
               </div>
-              <input
+              <textarea
                 className="goal-title-input"
                 value={goal.title}
                 onChange={(event) => setGoal(index, { title: event.target.value })}
                 placeholder="Goal title"
                 aria-label="Goal title"
+                rows={3}
                 data-testid={`input-goal-title-${goal.id}`}
               />
               <textarea
