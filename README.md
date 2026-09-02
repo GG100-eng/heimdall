@@ -1,2 +1,3 @@
-# heimdall
-A focused, finite X-style feed for Gagan.
+# Heimdall
+
+Cloudflare Pages: Framework Vite, Build command `npm run build`, Output directory `dist`, Root `/`
