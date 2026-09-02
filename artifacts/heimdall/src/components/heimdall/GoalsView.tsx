@@ -198,8 +198,8 @@ export function GoalsView({
         onChange={(geos) => onChange({ ...spec, geos })}
       />
 
-      {status && <p className="goals-status" data-testid="text-goals-status" role="status">{status}</p>}
       <div className="goals-save-bar">
+        {status && <p className="goals-status goals-status-sticky" data-testid="text-goals-status" role="status">{status}</p>}
         <button type="submit" className="goals-save" disabled={saving} data-testid="button-save-goals">
           {saving ? 'Saving…' : 'Save'}
         </button>

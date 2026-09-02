@@ -257,6 +257,7 @@ kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; 
 .chip-add { display: flex; gap: 8px; margin-top: 10px; }
 .chip-add button { padding: 0 8px; }
 .goals-status { margin: 0 16px 10px; color: hsl(var(--foreground)); font-size: 13px; line-height: 1.4; }
+.goals-status-sticky { margin: 0 0 10px; }
 .goals-save-bar {
   position: sticky;
   bottom: 0;
