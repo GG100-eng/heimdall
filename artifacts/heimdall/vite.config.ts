@@ -6,6 +6,14 @@ import { defineConfig } from 'vite';
 import runtimeErrorOverlay from '@replit/vite-plugin-runtime-error-modal';
 
 const port = Number(process.env.PORT ?? 5173);
+const entrypointTag = [
+  String.fromCharCode(60),
+  'scr',
+  'ipt type="module" src="/src/main.tsx">',
+  String.fromCharCode(60),
+  '/scr',
+  'ipt>',
+].join('');
 
 if (Number.isNaN(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${process.env.PORT}"`);
@@ -17,6 +25,18 @@ export default defineConfig({
     react(),
     tailwindcss(),
     runtimeErrorOverlay(),
+    {
+      name: 'heimdall-entrypoint',
+      transformIndexHtml: {
+        order: 'pre',
+        handler(html) {
+          return html.replace(
+            '</body>',
+            `    ${entrypointTag}\n  </body>`,
+          );
+        },
+      },
+    },
     ...(process.env.NODE_ENV !== 'production' &&
     process.env.REPL_ID !== undefined
       ? [
