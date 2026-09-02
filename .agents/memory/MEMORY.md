@@ -1,0 +1,1 @@
+- [Remote identity assets](remote-image-reliability.md) — use stable, verified image URLs for avatars and other identity-critical media.
