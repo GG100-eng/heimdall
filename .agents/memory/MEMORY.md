@@ -1,1 +1,2 @@
 - [Remote identity assets](remote-image-reliability.md) — use stable, verified image URLs for avatars and other identity-critical media.
+- [GitHub connector HTML writes](github-connector-html-writes.md) — keep Vite entry HTML script-free and inject the entrypoint through a pre-order transform when publishing.
