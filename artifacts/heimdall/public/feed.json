@@ -1,20 +1,60 @@
 [
   {
-    "id": "2095164928881729986",
+    "id": "2095511459874955710",
     "author": {
-      "name": "Developer DAO (, )",
-      "handle": "developer_dao",
-      "avatar": "https://pbs.twimg.com/profile_images/1762506843098595328/cI51manM_x96.png",
+      "name": "shlok",
+      "handle": "shlokafc",
+      "avatar": "https://pbs.twimg.com/profile_images/2076904050248036352/xrxWydUL_x96.jpg",
       "verified": false
     },
-    "text": "Have you signed up for our first episode of DevNTell?\n\nOn Thursday, we’ll be joined by Sid Coelho-Prabhu (\n@sid_coelho\n), Head of \n@CoinbaseBiz\n, to discuss the latest developments with Coinbase Business, a discussion around the future of agentic businesses, and more.\n\n Sept 3rd",
-    "url": "https://x.com/developer_dao/status/2095164928881729986",
-    "createdAt": "2026-09-02T15:00:19.000Z",
-    "media": [],
+    "text": "A giant like \n@revolut\n doing this is huge and only proves that the using AI to understand your money will become table stakes.\n\nThe real race is for three things - financial context, permission to act, and user trust.\n\nWhoever compounds those fastest will be the interface through",
+    "url": "https://x.com/shlokafc/status/2095511459874955710",
+    "createdAt": "2026-09-03T13:57:19.000Z",
+    "media": [
+      {
+        "type": "image",
+        "url": "https://pbs.twimg.com/amplify_video_thumb/2094727814704463872/img/VZa6aZsJoNXvQusb.jpg"
+      }
+    ],
     "article": null,
-    "metrics": { "replies": 1, "reposts": 2, "likes": 6, "bookmarks": 0, "views": 618 },
-    "bucket": "now",
-    "why": "Thursday (Sep 3) DevNTell with Sid Coelho-Prabhu, Head of Coinbase Business, on agentic businesses. Coinbase + agents + a live event tomorrow. Sign up from the post."
+    "metrics": {
+      "replies": 0,
+      "reposts": 0,
+      "likes": 1,
+      "bookmarks": 0,
+      "views": 59
+    },
+    "bucket": "later",
+    "why": "Revolut shipping AI money understanding, framed as a race for financial context, permission to act, and user trust. That is your consumer-AI / crypto product thesis stated cleanly, usable in interviews."
+  },
+  {
+    "id": "2095473197646827662",
+    "author": {
+      "name": "matthew sigel, recovering CFA",
+      "handle": "matthew_sigel",
+      "avatar": "https://pbs.twimg.com/profile_images/1836408905645117440/6cRz_BbT_x96.jpg",
+      "verified": false
+    },
+    "text": "Local men with no coding experience using Codex + Raspberry Pis (RPI LN) to turn their home batteries into automated energy traders, buying power when it’s cheap and selling it back to the grid when prices spike.",
+    "url": "https://x.com/matthew_sigel/status/2095473197646827662",
+    "createdAt": "2026-09-03T11:25:16.000Z",
+    "media": [
+      {
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HRSdKX6bEAA6p-F?format=png&name=900x900",
+        "alt": "Image"
+      }
+    ],
+    "article": null,
+    "metrics": {
+      "replies": 15,
+      "reposts": 11,
+      "likes": 166,
+      "bookmarks": 0,
+      "views": 8505
+    },
+    "bucket": "serendipity",
+    "why": "Serendipity: people with no coding background wiring Codex plus Raspberry Pis so home batteries trade energy automatically. A real agent-with-permission-to-act mechanism, not agent discourse."
   },
   {
     "id": "2095202779534909614",
@@ -27,9 +67,21 @@
     "text": "Meet Boski in San Francisco!\n\nWe are working on long running ai agent that works 24/7 on your personal goals\n\nYou can try it today on \nhttps://\nboski.com\n\nIf you want to give us feedback, talk consumer AI or cowork together, please dm\n\nWe will be in town between 4th and 12th",
     "url": "https://x.com/wojkuli/status/2095202779534909614",
     "createdAt": "2026-09-02T17:30:44.000Z",
-    "media": [{ "type": "image", "url": "https://pbs.twimg.com/media/HROn0m4bQAA_eId?format=jpg&name=medium", "alt": "Image" }],
+    "media": [
+      {
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HROn0m4bQAA_eId?format=jpg&name=medium",
+        "alt": "Image"
+      }
+    ],
     "article": null,
-    "metrics": { "replies": 0, "reposts": 0, "likes": 1, "bookmarks": 0, "views": 34 },
+    "metrics": {
+      "replies": 0,
+      "reposts": 0,
+      "likes": 1,
+      "bookmarks": 0,
+      "views": 34
+    },
     "bucket": "now",
     "why": "Boski is a 24/7 personal-goal agent. Try it; DM Woj only if you actually have feedback. He is in SF Sep 4–12, not a reason to fly."
   },
@@ -45,11 +97,23 @@
     "url": "https://x.com/lennysan/status/2095185629055447043",
     "createdAt": "2026-09-02T16:22:35.000Z",
     "media": [
-      { "type": "image", "url": "https://pbs.twimg.com/amplify_video_thumb/2095168961780633601/img/qBQc4SDGSGhllOKj.jpg" },
-      { "type": "video", "url": "https://pbs.twimg.com/amplify_video_thumb/2095168961780633601/img/qBQc4SDGSGhllOKj.jpg" }
+      {
+        "type": "image",
+        "url": "https://pbs.twimg.com/amplify_video_thumb/2095168961780633601/img/qBQc4SDGSGhllOKj.jpg"
+      },
+      {
+        "type": "video",
+        "url": "https://pbs.twimg.com/amplify_video_thumb/2095168961780633601/img/qBQc4SDGSGhllOKj.jpg"
+      }
     ],
     "article": null,
-    "metrics": { "replies": 11, "reposts": 4, "likes": 16, "bookmarks": 0, "views": 4433 },
+    "metrics": {
+      "replies": 11,
+      "reposts": 4,
+      "likes": 16,
+      "bookmarks": 0,
+      "views": 4433
+    },
     "bucket": "now",
     "why": "Maps ChatGPT Work vs Codex vs ChatGPT. You are living this stack; one pass so interview and product talk stay precise."
   },
@@ -66,7 +130,13 @@
     "createdAt": "2026-09-02T15:24:34.000Z",
     "media": [],
     "article": null,
-    "metrics": { "replies": 34, "reposts": 39, "likes": 929, "bookmarks": 0, "views": 152531 },
+    "metrics": {
+      "replies": 34,
+      "reposts": 39,
+      "likes": 929,
+      "bookmarks": 0,
+      "views": 152531
+    },
     "bucket": "later",
     "why": "Uber is quietly packaging out long-tenured eng + managers. Market signal for a senior hunt, not a role to chase."
   },
@@ -82,13 +152,35 @@
     "url": "https://x.com/MathecowitschH/status/2095154879627251914",
     "createdAt": "2026-09-02T14:20:24.000Z",
     "media": [
-      { "type": "image", "url": "https://pbs.twimg.com/media/HRN8KDYbkAEPAFQ?format=jpg&name=medium", "alt": "Image" },
-      { "type": "image", "url": "https://pbs.twimg.com/media/HRN8LAaaUAAA7og?format=jpg&name=medium", "alt": "Image" },
-      { "type": "image", "url": "https://pbs.twimg.com/media/HRN8NiHbEAAFhi1?format=jpg&name=900x900", "alt": "Image" },
-      { "type": "image", "url": "https://pbs.twimg.com/media/HRN8O10bwAAxof3?format=jpg&name=medium", "alt": "Image" }
+      {
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HRN8KDYbkAEPAFQ?format=jpg&name=medium",
+        "alt": "Image"
+      },
+      {
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HRN8LAaaUAAA7og?format=jpg&name=medium",
+        "alt": "Image"
+      },
+      {
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HRN8NiHbEAAFhi1?format=jpg&name=900x900",
+        "alt": "Image"
+      },
+      {
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HRN8O10bwAAxof3?format=jpg&name=medium",
+        "alt": "Image"
+      }
     ],
     "article": null,
-    "metrics": { "replies": 0, "reposts": 0, "likes": 0, "bookmarks": 0, "views": 45 },
+    "metrics": {
+      "replies": 0,
+      "reposts": 0,
+      "likes": 0,
+      "bookmarks": 0,
+      "views": 45
+    },
     "bucket": "later",
     "why": "Zanzibar Digital Free Zone copying Brazil stack (PIX, DREX, open finance). International payments lane, Coinbase/Veera-adjacent."
   },
@@ -103,9 +195,21 @@
     "text": "First MIT, then NYU, and now Yale are formally banning AI detection tools, citing high false-positive rates, systemic bias against non-native English speakers, and a fundamental preference for process-based assessment.\n\nEnterprise platforms will eventually run into the same legal",
     "url": "https://x.com/Fintech03/status/2095191307929153592",
     "createdAt": "2026-09-02T16:45:09.000Z",
-    "media": [{ "type": "image", "url": "https://pbs.twimg.com/media/HROdPpFaEAA0jyp?format=jpg&name=medium", "alt": "Image" }],
+    "media": [
+      {
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HROdPpFaEAA0jyp?format=jpg&name=medium",
+        "alt": "Image"
+      }
+    ],
     "article": null,
-    "metrics": { "replies": 0, "reposts": 1, "likes": 7, "bookmarks": 0, "views": 528 },
+    "metrics": {
+      "replies": 0,
+      "reposts": 1,
+      "likes": 7,
+      "bookmarks": 0,
+      "views": 528
+    },
     "bucket": "later",
     "why": "MIT, NYU, then Yale banned AI detectors. Process-over-surveillance is an interview and product talking point, not tonight."
   },
@@ -120,9 +224,21 @@
     "text": "imagine if someone ships a device that only has messaging. \n\ni.e. there is only one app + voice.",
     "url": "https://x.com/signulll/status/2095200377951965234",
     "createdAt": "2026-09-02T17:21:11.000Z",
-    "media": [{ "type": "image", "url": "https://pbs.twimg.com/media/HROlo7FbMAAdYpu?format=jpg&name=medium", "alt": "Image" }],
+    "media": [
+      {
+        "type": "image",
+        "url": "https://pbs.twimg.com/media/HROlo7FbMAAdYpu?format=jpg&name=medium",
+        "alt": "Image"
+      }
+    ],
     "article": null,
-    "metrics": { "replies": 16, "reposts": 0, "likes": 19, "bookmarks": 0, "views": 2123 },
+    "metrics": {
+      "replies": 16,
+      "reposts": 0,
+      "likes": 19,
+      "bookmarks": 0,
+      "views": 2123
+    },
     "bucket": "serendipity",
     "why": "Serendipity: a device that only does messaging. Intentional-tech shape, no action required."
   }
