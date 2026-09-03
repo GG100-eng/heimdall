@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/error-boundary';
+import { GoalsView } from '@/components/heimdall/GoalsView';
 import { AppShell, DetailView, FeedView, type LocalState, type Post } from '@/components/heimdall/HeimdallUI';
 import feed from '@/data/feed.json';
 import { Toaster } from '@/components/ui/toaster';
@@ -138,11 +139,21 @@ function StatusPage() {
   return <AppShell><DetailView post={post} state={actionState[post.id]} onToggle={toggle} /></AppShell>;
 }
 
+function GoalsPage() {
+  const [reloadToken, setReloadToken] = useState(0);
+  return (
+    <AppShell onRefresh={() => setReloadToken((value) => value + 1)}>
+      <GoalsView reloadToken={reloadToken} />
+    </AppShell>
+  );
+}
+
 function Router() {
   return (
     <ErrorBoundary resetKey={window.location.pathname}>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/goals" component={GoalsPage} />
         <Route path="/status/:id" component={StatusPage} />
         <Route component={NotFound} />
       </Switch>

@@ -19,8 +19,9 @@ import {
   Share2,
   Heart,
   Sparkles,
-  UserRound,
+  Target,
 } from 'lucide-react';
+import { DEFAULT_GOALS, fetchGoalsDocument, type GoalsDocument } from '@/lib/goals';
 
 export type Bucket = 'now' | 'later' | 'serendipity';
 export type Post = {
@@ -183,12 +184,13 @@ export function PostCard({
 }
 
 function Sidebar() {
+  const [location] = useLocation();
   const navItems: { label: string; icon: ReactNode; href?: string; disabled?: boolean }[] = [
     { label: 'Home', icon: <HomeIcon size={22} />, href: '/' },
+    { label: 'Goals', icon: <Target size={22} />, href: '/goals' },
     { label: 'Search', icon: <Search size={22} /> },
     { label: 'Alerts', icon: <Bell size={22} />, disabled: true },
     { label: 'Bookmarks', icon: <Bookmark size={22} />, disabled: true },
-    { label: 'Profile', icon: <UserRound size={22} /> },
   ];
   return (
     <aside className="sidebar">
@@ -197,31 +199,39 @@ function Sidebar() {
         {navItems.map((item) => item.disabled ? (
           <button key={item.label} type="button" className="nav-item nav-disabled" disabled aria-label={`${item.label} disabled`} data-testid={`button-nav-${item.label.toLowerCase()}`}>{item.icon}<span>{item.label}</span></button>
         ) : item.href ? (
-          <Link key={item.label} href={item.href} className="nav-item" data-testid={`link-nav-${item.label.toLowerCase()}`}>{item.icon}<span>{item.label}</span></Link>
+          <Link key={item.label} href={item.href} className={`nav-item ${location === item.href ? 'active' : ''}`} aria-current={location === item.href ? 'page' : undefined} data-testid={`link-nav-${item.label.toLowerCase()}`}>{item.icon}<span>{item.label}</span></Link>
         ) : (
           <button key={item.label} type="button" className="nav-item" onClick={() => undefined} data-testid={`button-nav-${item.label.toLowerCase()}`}>{item.icon}<span>{item.label}</span></button>
         ))}
       </nav>
       <button type="button" className="compose-side-button" onClick={() => document.getElementById('composer-input')?.focus()} data-testid="button-compose-side"><PenLine size={19} /><span>Post</span></button>
       <div className="sidebar-bottom">
-        <div className="account-chip" data-testid="text-account-chip"><Avatar author={{ name: 'Gagan Gehani', handle: 'GaganGehani', avatar: gaganAvatar, verified: true }} size="sm" /><div><strong>Gagan Gehani</strong><small>@GaganGehani</small></div><ChevronDown size={16} /></div>
+        <Link href="/goals" className="account-chip" aria-label="Goals" data-testid="link-account-goals"><Avatar author={{ name: 'Gagan Gehani', handle: 'GaganGehani', avatar: gaganAvatar, verified: true }} size="sm" /><div><strong>Gagan Gehani</strong><small>Goals</small></div><ChevronDown size={16} /></Link>
       </div>
     </aside>
   );
 }
 
 function RightRail() {
+  const [doc, setDoc] = useState<GoalsDocument>(DEFAULT_GOALS);
+  useEffect(() => {
+    void fetchGoalsDocument().then((live) => { if (live) setDoc(live); });
+  }, []);
+  const intent = doc.intent.trim() || 'job hunt';
+  const lanes = doc.goals.filter((goal) => goal.active).map((goal) => goal.title);
   return (
     <aside className="right-rail">
       <div className="search-box"><Search size={17} /><input aria-label="Search" placeholder="Search" data-testid="input-search" /></div>
       <section className="rail-section rail-now" data-testid="card-now-intent">
         <div className="rail-label">Now</div>
-        <h2>Job hunt</h2>
+        <h2>{intent}</h2>
       </section>
       <section className="rail-section rail-lanes" data-testid="card-lanes">
         <h2>Lanes</h2>
         <div className="lane-list">
-          <span>Senior / founding PM</span><span>AI · crypto · consumer</span><span>India · UAE · SG · MY · JP remote</span><span>Vegetarian high-protein</span>
+          {lanes.map((lane) => (
+            <span key={lane}>{lane}</span>
+          ))}
         </div>
       </section>
     </aside>
@@ -249,22 +259,22 @@ export function AppShell({ children, onRefresh }: { children: ReactNode; onRefre
     <div className="heimdall-app">
       <Sidebar />
       <main ref={mainRef} className="main-column feed-scroll">
-        {showNew && <button type="button" className="new-keepers-pill rise-in" onClick={top} data-testid="button-new-keepers"><Plus size={14} /> 3 new keepers</button>}
+        {showNew && location === '/' && <button type="button" className="new-keepers-pill rise-in" onClick={top} data-testid="button-new-keepers"><Plus size={14} /> 3 new keepers</button>}
         <header className="topbar">
           {location !== '/' && <Link href="/" className="back-button heimdall-focus" aria-label="Back to home" data-testid="link-back-home"><ArrowLeft size={19} /></Link>}
-      <div><h1>{location === '/' ? 'Home' : 'Post'}</h1></div>
-          <button type="button" className={`refresh-button ${refreshing ? 'refreshing' : ''}`} onClick={refresh} aria-label="Refresh feed" data-testid="button-refresh"><LoaderCircle size={18} /></button>
+      <div><h1>{location === '/' ? 'Home' : location === '/goals' ? 'Goals' : 'Post'}</h1></div>
+          <button type="button" className={`refresh-button ${refreshing ? 'refreshing' : ''}`} onClick={refresh} aria-label={location === '/goals' ? 'Refresh goals' : 'Refresh feed'} data-testid="button-refresh"><LoaderCircle size={18} /></button>
         </header>
         {children}
         <div className="mobile-spacer" />
       </main>
       <RightRail />
       <nav className="mobile-tabs" aria-label="Mobile navigation">
-        <Link href="/" className="mobile-tab active" aria-label="Home" data-testid="mobile-home"><HomeIcon size={21} /></Link>
+        <Link href="/" className={`mobile-tab ${location === '/' ? 'active' : ''}`} aria-label="Home" aria-current={location === '/' ? 'page' : undefined} data-testid="mobile-home"><HomeIcon size={21} /></Link>
         <button type="button" className="mobile-tab" aria-label="Search" data-testid="mobile-search"><Search size={21} /></button>
           <button type="button" className="mobile-tab" aria-label="Alerts disabled" disabled data-testid="mobile-alerts"><Bell size={21} /></button>
           <button type="button" className="mobile-tab" aria-label="Bookmarks disabled" disabled data-testid="mobile-bookmarks"><Bookmark size={21} /></button>
-        <button type="button" className="mobile-tab" aria-label="Profile" data-testid="mobile-profile"><UserRound size={21} /></button>
+        <Link href="/goals" className={`mobile-tab mobile-tab-goals ${location === '/goals' ? 'active' : ''}`} aria-label="Goals" aria-current={location === '/goals' ? 'page' : undefined} data-testid="mobile-goals"><Target size={18} /><span>Goals</span></Link>
       </nav>
     </div>
   );
