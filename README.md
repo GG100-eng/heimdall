@@ -6,6 +6,8 @@ Heimdall takes a selected set of X posts, puts them in a focused reading experie
 
 [Try the demo](https://heimdall-aae.pages.dev/) · [Evaluation plan](docs/evaluation-plan.md)
 
+Built by [Gagan Gehani](https://github.com/GG100-eng), from the product hypothesis and reading experience to the evaluation design.
+
 ## The problem
 
 Finding useful information on a social feed still requires a lot of filtering. Something can be interesting without being relevant to what you're trying to do today.
