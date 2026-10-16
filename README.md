@@ -2,11 +2,11 @@
 
 A finite feed for what matters to you right now.
 
-Heimdall takes a selected set of X posts, puts them in a focused reading experience, and gives the session an end. Read what made the cut. Then leave.
+Heimdall takes a selected set of X posts, puts them in a focused reading experience, and gives the session an end. The session ends when you finish the list.
 
 [Try the demo](https://heimdall-aae.pages.dev/) · [Evaluation plan](docs/evaluation-plan.md)
 
-Built by [Gagan Gehani](https://github.com/GG100-eng), from the product hypothesis and reading experience to the evaluation design.
+I’m [Gagan Gehani](https://github.com/GG100-eng). I built Heimdall to try a feed organised around what I’m working on. This repo covers the reader, the product choices and the evaluation plan.
 
 ## The problem
 
